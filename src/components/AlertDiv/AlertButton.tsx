@@ -7,7 +7,13 @@ interface AlertButtonProps {
 }
 export const AlertButton: React.FC<AlertButtonProps> = ({imageName, selectedAlert, setSelectedAlert}) => {
 
-  const key: string = imageName.split("/").pop()?.split('.')[0].replace("_", " ") || "";
+  const key: string =
+  imageName
+    .split("/")
+    .pop()
+    ?.split('.')[0]
+    .split('-')[0]   // remove everything after and including "-"
+    .replace("_", " ") || "";
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const sendMessage = async (sentMessage: string) => {
