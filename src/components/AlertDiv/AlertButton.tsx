@@ -17,7 +17,7 @@ export const AlertButton: React.FC<AlertButtonProps> = ({imageName, selectedAler
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: sentMessage })
       });
-      const data = await res.json();
+      await res.json();
     } catch (err) {
       console.error("Failed to send message:", err);
     }
