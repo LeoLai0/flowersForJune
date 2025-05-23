@@ -6,8 +6,10 @@ export const MessageDiv: React.FC = () => {
 
   const [message, setMessage] = useState<string>("");
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    fetch('/api/message')
+    fetch(`${apiUrl}/api/message`)
       .then((res) => res.json())
       .then((data) => {
         const retrievedMessage = data.message;

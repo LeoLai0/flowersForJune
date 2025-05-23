@@ -8,10 +8,11 @@ interface AlertButtonProps {
 export const AlertButton: React.FC<AlertButtonProps> = ({imageName, selectedAlert, setSelectedAlert}) => {
 
   const key: string = imageName.split("/").pop()?.split('.')[0].replace("_", " ") || "";
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const sendMessage = async (sentMessage: string) => {
     try {
-      const res = await fetch('/api/send-messenger', {
+      const res = await fetch(`${apiUrl}/api/send-messenger`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: sentMessage })

@@ -13,6 +13,7 @@ export const FlowerDiv: React.FC = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [flower, setFlower] = useState<string>(Orange);
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const randomImg = () => {
     const randomNum: number = Math.random();
@@ -31,7 +32,7 @@ export const FlowerDiv: React.FC = () => {
 
   const sendClaimMessage = async () => {
     try {
-      const res = await fetch('/api/send-messenger', {
+      const res = await fetch(`${apiUrl}/api/send-messenger`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: `June is claiming ${weeksPassed} flowers!` })
@@ -45,7 +46,7 @@ export const FlowerDiv: React.FC = () => {
   // Fetch start date on mount
   useEffect(() => {
     randomImg();
-    fetch('/api/start-date')
+    fetch(`${apiUrl}/api/start-date`)
       .then((res) => res.json())
       .then((data) => {
         const date = new Date(data.startDate);
@@ -62,7 +63,7 @@ export const FlowerDiv: React.FC = () => {
   // Reset handler
   const resetStartDate = () => {
     const now = new Date();
-    fetch('/api/start-date', {
+    fetch(`${apiUrl}/api/start-date`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ startDate: now.toISOString() }),
