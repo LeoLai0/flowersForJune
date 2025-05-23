@@ -4,10 +4,11 @@ import type React from "react";
 export const ConfigPage: React.FC = () => {
 
   const [input, setInput] = useState<string>('');
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const submitMessage = () => {
     if (input.trim() !== '') {
-      fetch('/api/message', {
+      fetch(`${apiUrl}/api/message`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: input.trim() }),
