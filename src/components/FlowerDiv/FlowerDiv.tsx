@@ -37,7 +37,7 @@ export const FlowerDiv: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: `June is claiming ${weeksPassed} flowers!` })
       });
-      const data = await res.json();
+      await res.json();
     } catch (err) {
       console.error("Failed to send message:", err);
     }
@@ -71,6 +71,7 @@ export const FlowerDiv: React.FC = () => {
       .then(() => {
         setStartDate(now);
         setWeeksPassed(0); // reset streak immediately
+        console.log(startDate);
       })
       .catch((err) => console.error("Failed to reset start date:", err));
   };
