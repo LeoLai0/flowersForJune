@@ -14,7 +14,7 @@ function App() {
       <div className="absolute bg-white top-30 h-10 w-dvw blur-[50px] z-[-1]"></div>
       <div className="absolute bg-fuchsia-100 bottom-40 right-20 h-20 w-dvw blur-[60px] z-[-1]"></div>
       <div className="absolute bg-orange-200 bottom-60 right-0 h-20 w-100 blur-[60px] z-[-1]"></div>
-      <BrowserRouter>
+      <BrowserRouter basename='/'>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/config" element={
