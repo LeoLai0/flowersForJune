@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import { useEffect, useState } from 'react';
 import '../../App.css';
-import Cloud_With_Sun from '../../assets/WeatherAssets/Cloud_With_Sun.png';
+import Cloud_With_Sun from '../../assets/WeatherAssets/Cloud_with_Sun.png';
 import Cloudy from '../../assets/WeatherAssets/Cloudy.png';
 import Breaking_Clouds from '../../assets/WeatherAssets/Breaking_Clouds.png';
 import Rainy from '../../assets/WeatherAssets/Rainy.png';
