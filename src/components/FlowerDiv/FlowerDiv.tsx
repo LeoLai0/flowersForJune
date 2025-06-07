@@ -54,7 +54,7 @@ export const FlowerDiv: React.FC = () => {
 
         const now = new Date();
         const diff = now.getTime() - date.getTime();
-        const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 14));
+        const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
         setWeeksPassed(weeks);
       })
       .catch((err) => console.error("Failed to fetch start date:", err));
