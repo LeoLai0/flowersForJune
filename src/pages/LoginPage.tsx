@@ -1,32 +1,44 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { markLoginToday } from "../utils/auth";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export const LoginPage: React.FC = () => {
-  const [pin, setPin] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [pin, setPin] = useState("");
+  const [error, setError] = useState("");
   const [showWelcome, setShowWelcome] = useState(false);
   const navigate = useNavigate();
 
-  const userPin: string = import.meta.env.VITE_USER_PASSWORD;
-  const configPin: string = import.meta.env.VITE_CONFIG_PASSWORD;
+  const handleLogin = async () => {
+    setError("");
 
-  const handleLogin = () => {
-    if (pin === userPin) {
-      markLoginToday('user');
-      setShowWelcome(true);
-      setTimeout(() => navigate('/home'), 1500);
-    } else if (pin === configPin) {
-      markLoginToday('config');
-      navigate('/config')
-    } else {
-      setError('Incorrect PIN. Try again.');
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        if (data.role === "user") {
+          markLoginToday("user");
+          setShowWelcome(true);
+          setTimeout(() => navigate("/home"), 1500);
+        } else if (data.role === "config") {
+          markLoginToday("config");
+          navigate("/config");
+        }
+      } else {
+        setError(data.message || "Incorrect PIN. Try again.");
+      }
+    } catch (err) {
+      setError("Login failed. Please try again.");
     }
   };
 
   return (
-    
     <div className="h-screen flex flex-col items-center justify-center transition-opacity duration-700 ease-in">
       {showWelcome ? (
         <motion.div
@@ -60,4 +72,4 @@ export const LoginPage: React.FC = () => {
       )}
     </div>
   );
-}
+};
